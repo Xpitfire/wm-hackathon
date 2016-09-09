@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/wm-lib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/wm-server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/wm-webapi"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
