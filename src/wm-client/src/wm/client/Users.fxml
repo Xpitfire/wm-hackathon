@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="821.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="821.0" style="-fx-background-color: lightblue;">
+        <menus>
+          <Menu mnemonicParsing="false" text="Users">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Teams">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Matches">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TableView layoutX="26.0" layoutY="134.0" prefHeight="200.0" prefWidth="641.0">
+        <columns>
+          <TableColumn prefWidth="198.0" text="Username" />
+            <TableColumn prefWidth="180.0" text="First Name" />
+            <TableColumn prefWidth="169.0" text="Last Name" />
+          <TableColumn prefWidth="93.0" text="blocked" />
+        </columns>
+      </TableView>
+      <Label layoutX="26.0" layoutY="50.0" text="Users" textFill="WHITE">
+         <font>
+            <Font name="Calibri" size="47.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="377.0" text="Add a new User" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField layoutX="26.0" layoutY="470.0" />
+      <TextField layoutX="186.0" layoutY="470.0" />
+      <TextField layoutX="348.0" layoutY="470.0" />
+      <Label layoutX="26.0" layoutY="445.0" text="Username" textFill="#ffffffe7">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="186.0" layoutY="445.0" text="First Name" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="510.0" layoutY="470.0" />
+      <Label layoutX="348.0" layoutY="445.0" text="Last Name" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="510.0" layoutY="445.0" text="Password" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ToggleButton layoutX="678.0" layoutY="469.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: white;" text="Add">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </ToggleButton>
+   </children>
+   <effect>
+      <Blend />
+   </effect>
+</AnchorPane>
