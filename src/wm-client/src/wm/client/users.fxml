@@ -9,10 +9,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="821.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="821.0" style="-fx-background-color: lightblue;" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="821.0" style="-fx-background-color: lightblue;">
+      <MenuBar prefHeight="25.0" prefWidth="821.0" style="-fx-background-color: white;">
         <menus>
           <Menu mnemonicParsing="false" text="Users">
             <items>
@@ -82,4 +81,4 @@
    <effect>
       <Blend />
    </effect>
-</AnchorPane>
+</fx:root>
