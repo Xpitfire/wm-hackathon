@@ -72,15 +72,16 @@ public interface WmRmi extends Remote {
 	 * @param place
 	 * @param date
 	 * @param wmState
+	 * @return game id
 	 * @throws RemoteException
 	 */
-	void createGame(Team team1, Team team2, String place, Date date, WmState wmState) throws RemoteException;
+	int createGame(String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
 	/**
 	 * @param id
 	 * @return false if game does not exist
 	 * @throws RemoteException
 	 */
-	boolean delete(int id) throws RemoteException;
+	boolean deleteGame(int id) throws RemoteException;
 	/**
 	 * @param id
 	 * @param team1
@@ -91,7 +92,7 @@ public interface WmRmi extends Remote {
 	 * @return false if game does not exist
 	 * @throws RemoteException
 	 */
-	boolean updateGame(int id, Team team1, Team team2, String place, Date date, WmState wmState) throws RemoteException;
+	boolean updateGame(int id, String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
 	/**
 	 * @param id
 	 * @param goal1
@@ -109,10 +110,10 @@ public interface WmRmi extends Remote {
 	
 	/**
 	 * @param tip
-	 * @return false if game already finished or does not exist
+	 * @return tip id / -1 if game already finished or does not exist
 	 * @throws RemoteException
 	 */
-	boolean addTip(Tip tip) throws RemoteException;
+	int addTip(Tip tip) throws RemoteException;
 	/**
 	 * @return list of all tips
 	 * @throws RemoteException
@@ -123,6 +124,13 @@ public interface WmRmi extends Remote {
 	 * @return total points reached at bet / -1 if tip does not exist or game not finished yet
 	 * @throws RemoteException
 	 */
-	int evaluate(int id) throws RemoteException;
+	int evaluateTip(int id) throws RemoteException;
+	
+	/**
+	 * @param id
+	 * @return total points reached at bonus questions / -1 if tip does not exist or wm not finished yet
+	 * @throws RemoteException
+	 */
+	int evaluateBonusQuestions(int id) throws RemoteException;
 	
 }
