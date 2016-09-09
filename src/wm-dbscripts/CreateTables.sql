@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS dbo;
+USE dbo;
 
 DROP TABLE IF EXISTS `dbo`.`Team`;
 DROP TABLE IF EXISTS `dbo`.`User`;
@@ -16,6 +17,7 @@ CREATE TABLE `dbo`.`User` (
 	`passwordHash`	VARCHAR (60)	NOT NULL,
 	`firstName`		VARCHAR (30)	NOT NULL,
 	`lastName`		VARCHAR (30)	NOT NULL,
+	`isActive`      TINYINT         NOT NULL,
 	PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

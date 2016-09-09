@@ -18,9 +18,9 @@ public class WmDbMySqlImpl implements WmDb {
 
 	private static final String DB_URL = "127.0.0.1";
 	private static final String DB_PORT = "3306";
-	private static final String DB_NAME = "EuroBetDb";
+	private static final String DB_NAME = "dbo";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "root";
+	private static final String DB_PASSWORD = "";
 
 	public WmDbMySqlImpl() {
 		// TODO Auto-generated constructor stub
@@ -28,14 +28,19 @@ public class WmDbMySqlImpl implements WmDb {
 
 	@Override
 	public void add(User user) {
-		// TODO Auto-generated method stub
-
+		executeSqlUpdate(
+				"INSERT INTO User VALUES("
+						+ " '" + user.getUsername() + "',"
+						+ " '" + user.getPasswordHash() + "', "
+						+ " '" + user.getFirstName() + "', "
+						+ " '" + user.getLastName() + "', "
+						+ " " + user.isActive()
+						+ ");");
 	}
 
 	@Override
 	public void block(User user) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -82,9 +87,9 @@ public class WmDbMySqlImpl implements WmDb {
 	}
 
 	@Override
-	public void add(Game game) {
+	public int add(Game game) {
 		// TODO Auto-generated method stub
-
+		return -1;
 	}
 
 	@Override
@@ -106,9 +111,9 @@ public class WmDbMySqlImpl implements WmDb {
 	}
 
 	@Override
-	public void add(Tip tip) {
+	public int add(Tip tip) {
 		// TODO Auto-generated method stub
-
+		return -1;
 	}
 
 	@Override
@@ -117,6 +122,30 @@ public class WmDbMySqlImpl implements WmDb {
 		return null;
 	}
 
+	@Override
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Team getTeam(String countryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Game getGame(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Tip getTip(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private Integer executeSqlUpdate(String sql) {
 		try {
 			Connection connection = getConnection();
@@ -149,30 +178,6 @@ public class WmDbMySqlImpl implements WmDb {
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:mysql://" + DB_URL + ":" + DB_PORT + "/" + DB_NAME, DB_USER,
 				DB_PASSWORD);
-	}
-
-	@Override
-	public User getUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Team getTeam(String countryId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Game getGame(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tip getTip(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
