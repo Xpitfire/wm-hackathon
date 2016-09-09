@@ -23,7 +23,7 @@ public class WmDbMySqlImpl implements WmDb {
 	private static final String DB_NAME = "dbo";
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "";
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyy-mm-ddThh:mm:ssZ");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyy-mm-dd'T'hh:mm:ss'Z'");
 
 	public WmDbMySqlImpl() {
 	}
