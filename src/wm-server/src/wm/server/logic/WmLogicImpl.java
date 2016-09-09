@@ -272,6 +272,7 @@ public class WmLogicImpl implements WmRmi {
 		if(minGoalsScored) {
 			points += 4;
 		}
+		return points;
 	}
 
 }
