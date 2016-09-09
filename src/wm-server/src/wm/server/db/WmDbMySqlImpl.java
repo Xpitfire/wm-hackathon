@@ -28,7 +28,7 @@ public class WmDbMySqlImpl implements WmDb {
 
 	@Override
 	public void add(User user) {
-		executeSqlUpdate(
+		executeSqlStatement(
 				"INSERT INTO User VALUES("
 						+ " '" + user.getUsername() + "',"
 						+ " '" + user.getPasswordHash() + "', "
@@ -40,13 +40,17 @@ public class WmDbMySqlImpl implements WmDb {
 
 	@Override
 	public void block(User user) {
-		// TODO Auto-generated method stub
+		executeSqlStatement(
+				"UPDATE User SET"
+						+ "username = '" + user.getUsername() + "',"
+						+ "isActive = " + false
+						+ ";");
 	}
 
 	@Override
 	public List<User> getUsers() {
 		List<User> users = new ArrayList<>();
-		ResultSet result = executeSqlSelect("SELECT * FROM users");
+		ResultSet result = executeSqlSelect("SELECT * FROM User");
 		try {
 			while (result.next()) {
 				User user = new User(
@@ -145,8 +149,8 @@ public class WmDbMySqlImpl implements WmDb {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	private Integer executeSqlUpdate(String sql) {
+		
+	private int executeSqlStatement(String sql) {
 		try {
 			Connection connection = getConnection();
 			Statement statement = connection.createStatement();
@@ -176,8 +180,10 @@ public class WmDbMySqlImpl implements WmDb {
 	}
 
 	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://" + DB_URL + ":" + DB_PORT + "/" + DB_NAME, DB_USER,
-				DB_PASSWORD);
+		return DriverManager.getConnection("jdbc:mysql://" 
+				+ DB_URL + ":" 
+				+ DB_PORT + "/" 
+				+ DB_NAME, DB_USER, DB_PASSWORD);
 	}
 
 }
