@@ -6,6 +6,12 @@ public class Team implements Serializable {
 	private String country;
 	private String name;
 	
+	public Team(String country, String name) {
+		super();
+		this.country = country;
+		this.name = name;
+	}
+	
 	public String getCountry() {
 		return country;
 	}
