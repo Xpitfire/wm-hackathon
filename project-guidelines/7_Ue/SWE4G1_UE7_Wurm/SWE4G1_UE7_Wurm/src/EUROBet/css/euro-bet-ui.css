@@ -1,0 +1,25 @@
+#nav-welcome {
+	-fx-text-fill: #ffffff;
+}
+
+#nav-button {
+	-fx-border-color: dimgrey;
+	-fx-background-color: transparent;
+	-fx-text-fill: #ffffff;
+	-fx-border-insets: 5px;
+}
+
+#nav-button:hover{
+    -fx-background-color: #282c34;
+}
+
+
+#user-detail-container {
+	-fx-padding: 10.0 3.0 5.0 0.0;
+}
+
+#control-pane {
+	-fx-spacing: 5;
+	-fx-padding: 10,20;
+	-fx-border-color: dimgrey;
+}
