@@ -1,7 +1,7 @@
 package wm.lib.model;
 
 public enum WmState {
-	QUALIFICATION(-1), ROUND_OF_16(0), QUARTER_FINAL(1), SEMI_FINAL(2), FINAL(3);
+	QUALIFICATION(5), ROUND_OF_16(4), QUARTER_FINAL(3), SEMI_FINAL(2), FINAL(1);
 
 	private final int id;
 
@@ -15,13 +15,13 @@ public enum WmState {
 
 	public static WmState toWmState(int id) {
 		switch (id) {
-		case 0:
+		case 4:
 			return ROUND_OF_16;
-		case 1:
+		case 3:
 			return QUARTER_FINAL;
 		case 2:
 			return SEMI_FINAL;
-		case 3:
+		case 1:
 			return FINAL;
 
 		default:
