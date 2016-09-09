@@ -16,7 +16,7 @@ public interface WmRmi extends Remote {
 	 * @param passwordHash
 	 * @param firstName
 	 * @param lastName
-	 * @return false if user already exists
+	 * @return false if user already exists or one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	boolean createUser(String username, String passwordHash, String firstName, String lastName) throws RemoteException;
@@ -42,7 +42,7 @@ public interface WmRmi extends Remote {
 	/**
 	 * @param country
 	 * @param name
-	 * @return false if team already exists
+	 * @return false if team already exists, name is empty or country does not have 3 characters
 	 * @throws RemoteException
 	 */
 	boolean createTeam(String country, String name) throws RemoteException;
@@ -55,7 +55,7 @@ public interface WmRmi extends Remote {
 	/**
 	 * @param country
 	 * @param name
-	 * @return false if team does not exist
+	 * @return false if team does not exist or name is invalid
 	 * @throws RemoteException
 	 */
 	boolean updateTeam(String country, String name) throws RemoteException;
@@ -72,7 +72,7 @@ public interface WmRmi extends Remote {
 	 * @param place
 	 * @param date
 	 * @param wmState
-	 * @return game id
+	 * @return game id / -1  if one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	int createGame(String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
@@ -89,7 +89,7 @@ public interface WmRmi extends Remote {
 	 * @param place
 	 * @param date
 	 * @param wmState
-	 * @return false if game does not exist
+	 * @return false if game does not exist or one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	boolean updateGame(int id, String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
@@ -97,7 +97,7 @@ public interface WmRmi extends Remote {
 	 * @param id
 	 * @param goal1
 	 * @param goal2
-	 * @return false if game does not exist
+	 * @return false if game does not exist or one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	boolean setFinalResult(int id, int goal1, int goal2) throws RemoteException;

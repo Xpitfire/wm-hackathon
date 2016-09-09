@@ -53,6 +53,7 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public boolean createTeam(String country, String name) throws RemoteException {
+		country = country.toUpperCase();
 		if(wmdb.getTeam(country) != null) {
 			return false;
 		}
@@ -62,6 +63,8 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public boolean deleteTeam(String country) throws RemoteException {
+		country = country.toUpperCase();
+		country = country.toUpperCase();
 		if(wmdb.getTeam(country) == null) {
 			return false;
 		}
@@ -71,6 +74,7 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public boolean updateTeam(String country, String name) throws RemoteException {
+		country = country.toUpperCase();
 		if(wmdb.getTeam(country) == null) {
 			return false;
 		}
@@ -85,6 +89,8 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public int createGame(String team1, String team2, String place, Date date, WmState wmState) throws RemoteException {
+		team1 = team1.toUpperCase();
+		team2 = team2.toUpperCase();
 		return wmdb.add(new Game(team1, team2, place, date, wmState));
 	}
 
@@ -99,6 +105,8 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public boolean updateGame(int id, String team1, String team2, String place, Date date, WmState wmState) {
+		team1 = team1.toUpperCase();
+		team2 = team2.toUpperCase();
 		if(wmdb.getGame(id) == null) {
 			return false;
 		}
@@ -144,7 +152,7 @@ public class WmLogicImpl implements WmRmi {
 		Tip tip = wmdb.getTip(id);
 		int goal1 = wmdb.getGame(tip.getGameId()).getGoal1();
 		int goal2 = wmdb.getGame(tip.getGameId()).getGoal2();
-		if(goal1 == -1 || goal2 == -1) {
+		if(goal1 < 0 || goal2 < 0) {
 			return -1;
 		}
 		int points = 0;
@@ -160,7 +168,7 @@ public class WmLogicImpl implements WmRmi {
 		}
 		// if correct score has been guessed => 2 additional points
 		if(goal1 == tip.getTipGoalTeam1() && goal2 == tip.getTipGoalTeam2()) {
-			points+=2;
+			points += 2;
 		}
 		return points;
 	}
