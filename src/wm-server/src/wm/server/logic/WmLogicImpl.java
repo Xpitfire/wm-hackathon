@@ -3,72 +3,72 @@ package wm.server.logic;
 import java.util.Date;
 import java.util.List;
 
+import wm.lib.WmDb;
 import wm.lib.WmLogic;
+import wm.lib.WmRmi;
 import wm.lib.WmState;
 import wm.lib.model.Game;
 import wm.lib.model.Team;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
 
-public class WmLogicImpl implements WmLogic {
+public class WmLogicImpl implements WmRmi {
+	private WmDb wmdb;
+	
+	public WmLogicImpl(WmDb wmdb) {
+		this.wmdb = wmdb;
+	}
 
 	@Override
 	public void add(User user) {
-		
+		wmdb.add(user);
 	}
 
 	@Override
 	public void block(User user) {
-		// TODO Auto-generated method stub
-
+		wmdb.block(user);
 	}
 
 	@Override
 	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return wmdb.getUsers();
 	}
 
 	@Override
 	public void add(Team team) {
-		// TODO Auto-generated method stub
-
+		wmdb.add(team);
 	}
 
 	@Override
 	public void delete(Team team) {
-		// TODO Auto-generated method stub
-
+		wmdb.delete(team);
 	}
 
 	@Override
 	public void update(Team team) {
-		// TODO Auto-generated method stub
-
+		wmdb.update(team);
 	}
 
 	@Override
 	public List<Team> getTeams() {
-		// TODO Auto-generated method stub
-		return null;
+		return wmdb.getTeams();
 	}
 
 	@Override
 	public Game createGame(Team team1, Team team2, String place, Date date, WmState wmState) {
-		// TODO Auto-generated method stub
-		return null;
+		Game game = new Game(team1.getCountry(), team2.getCountry(), place, date, wmState);
+		wmdb.add(game);
+		return game;
 	}
 
 	@Override
 	public void delete(Game game) {
-		// TODO Auto-generated method stub
-
+		wmdb.delete(game);
 	}
 
 	@Override
 	public void update(Game game) {
-		// TODO Auto-generated method stub
-
+		wmdb.update(game);
 	}
 
 	@Override

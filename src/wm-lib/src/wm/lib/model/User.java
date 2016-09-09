@@ -14,6 +14,15 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	public User(String username, String passwordHash, String firstName, String lastName) {
+		super();
+		this.username = username;
+		this.passwordHash = passwordHash;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public String getUsername() {
 		return username;
 	}
