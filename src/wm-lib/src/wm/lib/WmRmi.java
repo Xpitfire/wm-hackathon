@@ -129,7 +129,7 @@ public interface WmRmi extends Remote {
 	
 	/**
 	 * @param id
-	 * @return total points reached at bonus questions / -1 if tip does not exist or wm not finished yet
+	 * @return total points reached at bonus questions / -1 if tip does not exist or WM not finished yet
 	 * @throws RemoteException
 	 */
 	int evaluateBonusQuestions(int id) throws RemoteException;

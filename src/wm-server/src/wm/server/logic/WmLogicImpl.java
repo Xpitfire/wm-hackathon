@@ -1,7 +1,9 @@
 package wm.server.logic;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import wm.lib.WmDb;
@@ -179,7 +181,98 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public int evaluateBonusQuestions(int id) throws RemoteException {
-		return 0;
+		if(wmdb.getTip(id) == null) {
+			return -1;
+		}
+		int points = 0;
+		Tip tip = wmdb.getTip(id);
+		HashMap<String, Integer> numGoalsScored = new HashMap<>();
+		HashMap<String, Integer> numGamesWon = new HashMap<>();
+		HashMap<String, Integer> numGamesLost = new HashMap<>();
+		for(Team team: wmdb.getTeams()) {
+			numGoalsScored.put(team.getCountry(), 0);
+			numGamesWon.put(team.getCountry(), 0);
+			numGamesLost.put(team.getCountry(), 0);
+		}
+		boolean finalHasBeenPlayed = false;
+		for(Game game: wmdb.getGames()) {
+			// one game has not been finished => error
+			if(game.getGoal1() < 0 || game.getGoal2() < 0) {
+				return -1;
+			}
+			String team1 = game.getTeam1Id();
+			String team2 = game.getTeam2Id();
+			if(game.getGoal1() > game.getGoal2()) {
+				numGamesWon.put(team1, numGamesWon.get(team1)+1);
+				numGamesLost.put(team2, numGamesWon.get(team2)+1);
+				if(game.getWmstate() == WmState.FINAL) {
+					finalHasBeenPlayed = true;
+					// if correct wm winner has been guessed => 10 points
+					if(team1 == tip.getTipWmWinnerTeamId()) {
+						points += 10;
+					}
+					// if correct second place has been guessed => 8 points
+					if(team2 == tip.getTipSecondPlaceTeamId()) {
+						points += 8;
+					}
+				}
+			}
+			if(game.getGoal2() > game.getGoal1()) {
+				numGamesWon.put(team2, numGamesWon.get(team2)+1);
+				numGamesLost.put(team1, numGamesWon.get(team1)+1);
+				if(game.getWmstate() == WmState.FINAL) {
+					finalHasBeenPlayed = true;
+					// if correct wm winner has been guessed => 10 points
+					if(team2 == tip.getTipWmWinnerTeamId()) {
+						points += 10;
+					}
+					// if correct second place has been guessed => 8 points
+					if(team1 == tip.getTipSecondPlaceTeamId()) {
+						points += 8;
+					}
+				}
+			}
+			numGoalsScored.put(team1, numGoalsScored.get(team1)+game.getGoal1());
+			numGoalsScored.put(team2, numGoalsScored.get(team2)+game.getGoal2());
+		}
+		if(!finalHasBeenPlayed) {
+			return -1;
+		}
+		
+		boolean maxGamesWon = true, maxGamesLost = true, maxGoalsScored = true, minGoalsScored = true;
+		for(Team team: wmdb.getTeams()) {
+			int goalsScored = numGoalsScored.get(team.getCountry());
+			int gamesWon = numGamesWon.get(team.getCountry());
+			int gamesLost = numGamesLost.get(team.getCountry());
+			if(numGamesWon.get(team.getCountry()) > numGamesWon.get(tip.getTipMostGamesWonTeamId())) {
+				maxGamesWon = false;
+			}
+			if(numGamesLost.get(team.getCountry()) > numGamesLost.get(tip.getTipMostGamesLostTeamId())) {
+				maxGamesLost = false;
+			}
+			if(numGoalsScored.get(team.getCountry()) > numGoalsScored.get(tip.getTipGoalWinnerTeamId())) {
+				maxGoalsScored = false;
+			}
+			if(numGoalsScored.get(team.getCountry()) < numGoalsScored.get(tip.getTipGoalLoserTeamId())) {
+				minGoalsScored = false;
+			}
+		}
+		// if correct team with maximal games won has been guessed => 7 points
+		if(maxGamesWon) {
+			points += 7;
+		}
+		// if correct team with maximal games lost has been guessed => 6 points
+		if(maxGamesLost) {
+			points += 6;
+		}
+		// if correct team with maximal goals has been guessed => 5 points
+		if(maxGoalsScored) {
+			points += 5;
+		}
+		// if correct team with minimal goals has been guessed => 4 points
+		if(minGoalsScored) {
+			points += 4;
+		}
 	}
 
 }
