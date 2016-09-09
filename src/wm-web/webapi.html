@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<title>WM</title>
+	<meta charset="utf-8"/>
+</head>
+
+<body>
+	<div class="container">
+		<div class="main">
+			<h2>WM 2018</h2>
+			<form id="form_id" method="post" name="myform">
+				<label>User Name :</label>
+				<input type="text" name="username" id="username"/>
+				<label>Password :</label>
+				<input type="password" name="password" id="password"/>
+				<input type="button" value="Login" id="submit" onclick="validate()"/>
+			</form>
+			<form method="post" action="mailto:youremail@youremail.com" >
+				<input type="submit" value="Send Email" /> 
+			</form>
+		</div>
+	</div>
+	<script>
+		var attempt = 3; 
+		function validate(){
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			if ( username == "Formget" && password == "formget#123"){
+				alert ("Login successfully");
+				window.location = "success.html":
+				return false;
+			} else {
+				attempt --;// Decrementing by one.
+				alert("You have left "+attempt+" attempt;");
+				// Disabling fields after 3 attempts.
+				if( attempt == 0){
+					document.getElementById("username").disabled = true;
+					document.getElementById("password").disabled = true;
+					document.getElementById("submit").disabled = true;
+					return false;
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

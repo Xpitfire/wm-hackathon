@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Creating a table using javascript and AJAX</title>
+
+	</head>
+
+	<body>
+
+	<div class="wrapper">
+
+	</div>
+	
+	<p id="demo"></p> 
+	<p id="demo2"></p> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		var text = '{"Matches":[{"country1":"USA","country2":"AUT","goalsCountry1":1,"goalsCountry2":2},{"country1":"GER","country2":"RUS","goalsCountry1":2,"goalsCountry2":2},{"country1":"FRA","country2":"ESP","goalsCountry1":0,"goalsCountry2":1}],"Highscores":[{"username":"Lautschi","points":100},{"username":"Marius","points":90},{"username":"Philipp","points":80},{"username":"Phips","points":70},{"username":"Viki","points":0}]}';	
+		var obj = JSON.parse(text);		
+		var tbl = document.createElement("table");
+		tbl.id = "matchestable";						 
+		var trh=document.createElement("tr");
+		var th1=document.createElement("th");
+		th1.innerHTML="Countries";
+		trh.appendChild(th1);
+		var th2=document.createElement("th");
+		th2.innerHTML="Result";
+		trh.appendChild(th2);					
+		tbl.appendChild(trh);				
+		for(var i=0;i<=2;i++){
+			var tr=document.createElement("tr");						
+			var td1=document.createElement("td");
+			td1.innerHTML=obj.Matches[i].country1 + "-" + obj.Matches[i].country2; 
+			tr.appendChild(td1);
+			var td2=document.createElement("td");
+			td2.innerHTML=obj.Matches[i].goalsCountry1 + "-" + obj.Matches[i].goalsCountry2; 
+			tr.appendChild(td2);												
+			tbl.appendChild(tr);
+		}
+		document.getElementsByClassName("wrapper")[0].appendChild(tbl);
+		
+		
+		var tbl = document.createElement("table");
+		tbl.id = "highscoretable";						 
+		var trh=document.createElement("tr");
+		var th1=document.createElement("th");
+		th1.innerHTML="Username";
+		trh.appendChild(th1);
+		var th2=document.createElement("th");
+		th2.innerHTML="Points";
+		trh.appendChild(th2);					
+		tbl.appendChild(trh);				
+		for(var i=0;i<=4;i++){
+			var tr=document.createElement("tr");						
+			var td1=document.createElement("td");
+			td1.innerHTML=obj.Highscores[i].username;
+			tr.appendChild(td1);
+			var td2=document.createElement("td");
+			td2.innerHTML=obj.Highscores[i].points; 
+			tr.appendChild(td2);												
+			tbl.appendChild(tr);
+		}
+		document.getElementsByClassName("wrapper")[0].appendChild(tbl);
+		
+	</script>
+
+	</body>
+
+		
+</html>
