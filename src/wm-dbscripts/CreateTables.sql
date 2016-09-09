@@ -1,10 +1,10 @@
 CREATE DATABASE IF NOT EXISTS dbo;
 USE dbo;
 
-DROP TABLE IF EXISTS `dbo`.`Team`;
-DROP TABLE IF EXISTS `dbo`.`User`;
-DROP TABLE IF EXISTS `dbo`.`Game`;
 DROP TABLE IF EXISTS `dbo`.`Tip`;
+DROP TABLE IF EXISTS `dbo`.`Game`;
+DROP TABLE IF EXISTS `dbo`.`User`;
+DROP TABLE IF EXISTS `dbo`.`Team`;
 
 CREATE TABLE `dbo`.`Team` (
 	`country`	VARCHAR (3)		NOT NULL,
@@ -51,6 +51,7 @@ CREATE TABLE `dbo`.`Tip` (
 	`tipGoalWinnerTeamId`	VARCHAR (3)	NOT NULL,
 	`tipGoalLoserTeamId`	VARCHAR (3)	NOT NULL,
 	`tipSecondPlaceTeamId`	VARCHAR (3)	NOT NULL,
+	`tipWmStateLoser`		INT			NOT NULL,
 	`tipWmStateLoserTeamId`	VARCHAR (3)	NOT NULL,
 	`tipZeroGoalsTeamId`	VARCHAR (3)	NOT NULL,
 	PRIMARY KEY (`id`),
