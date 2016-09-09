@@ -73,7 +73,7 @@ public interface WmRmi extends Remote {
 	 * @param place
 	 * @param date
 	 * @param wmState
-	 * @return game id / -1  if one of the inputs is invalid
+	 * @return game id / -1 if one of the teams does not exist ore one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	int createGame(String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
@@ -90,7 +90,7 @@ public interface WmRmi extends Remote {
 	 * @param place
 	 * @param date
 	 * @param wmState
-	 * @return false if game does not exist or one of the inputs is invalid
+	 * @return false if one of the teams does not exist ore one of the inputs is invalid
 	 * @throws RemoteException
 	 */
 	boolean updateGame(int id, String team1, String team2, String place, Date date, WmState wmState) throws RemoteException;
