@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import wm.lib.model.Game;
 import wm.lib.model.Team;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
+import wm.lib.model.WmState;
 
 public class WmDbMySqlImpl implements WmDb {
 
@@ -21,9 +23,9 @@ public class WmDbMySqlImpl implements WmDb {
 	private static final String DB_NAME = "dbo";
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "";
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyy-mm-ddThh:mm:ssZ");
 
 	public WmDbMySqlImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -41,10 +43,9 @@ public class WmDbMySqlImpl implements WmDb {
 	@Override
 	public void block(User user) {
 		executeSqlStatement(
-				"UPDATE User SET"
-						+ "username = '" + user.getUsername() + "',"
+				"UPDATE User SET "
 						+ "isActive = " + false
-						+ ";");
+						+ " WHERE username LIKE '" + user.getUsername() + "';");
 	}
 
 	@Override
@@ -68,85 +69,179 @@ public class WmDbMySqlImpl implements WmDb {
 
 	@Override
 	public void add(Team team) {
-		// TODO Auto-generated method stub
-
+		executeSqlStatement(
+				"INSERT INTO Team VALUES("
+						+ " '" + team.getCountry() + "',"
+						+ " '" + team.getName() + "' "
+						+ ");");
 	}
 
 	@Override
 	public void delete(Team team) {
-		// TODO Auto-generated method stub
-
+		executeSqlStatement(
+				"DELETE FROM Team WHERE country LIKE '" 
+						+ team.getCountry() + "';");
 	}
 
 	@Override
 	public void update(Team team) {
-		// TODO Auto-generated method stub
-
+		executeSqlStatement(
+				"UPDATE Team SET "
+						+ "name = '" + team.getName() + "'"
+						+ " WHERE country LIKE '" + team.getCountry() + "';");
 	}
 
 	@Override
 	public List<Team> getTeams() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Team> teams = new ArrayList<>();
+		ResultSet result = executeSqlSelect("SELECT * FROM Team");
+		try {
+			while (result.next()) {
+				Team team = new Team(
+						result.getString("country"), 
+						result.getString("name"));
+				teams.add(team);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teams;
 	}
-
+	
 	@Override
 	public int add(Game game) {
-		// TODO Auto-generated method stub
-		return -1;
+		return executeSqlStatement(
+				"INSERT INTO (team1Id, team2Id, place, date, goal1, goal2, wmstate) Game VALUES("
+						+ " '" + game.getTeam1Id() + "',"
+						+ " '" + game.getTeam2Id() + "',"
+						+ " '" + game.getPlace() + "',"
+						+ " '" + DATE_FORMATTER.format(game.getDate()) + "',"
+						+ " '" + game.getGoal1() + "',"
+						+ " '" + game.getGoal2() + "',"
+						+ " '" + game.getWmstate() + "' "
+						+ ");");
 	}
 
 	@Override
 	public void delete(Game game) {
-		// TODO Auto-generated method stub
-
+		executeSqlStatement(
+				"DELETE FROM Game WHERE id = " 
+						+ game.getId() + ";");
 	}
 
 	@Override
 	public void update(Game game) {
-		// TODO Auto-generated method stub
-
+		executeSqlStatement(
+				"UPDATE Game SET "
+						+ "team1Id = '" + game.getTeam1Id() + "', "
+						+ "team2Id = '" + game.getTeam2Id() + "', "
+						+ "place = '" + game.getPlace() + "', "
+						+ "date = '" + DATE_FORMATTER.format(game.getDate()) + "', "
+						+ "goal1 = '" + game.getGoal1() + "', "
+						+ "goal2 = '" + game.getGoal2() + "', "
+						+ "wmstate = '" + game.getWmstate() + "'"
+						+ " WHERE id = " + game.getId() + ";");
 	}
 
 	@Override
 	public List<Game> getGames() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Game> games = new ArrayList<>();
+		ResultSet result = executeSqlSelect("SELECT * FROM Game");
+		try {
+			while (result.next()) {
+				Game game = new Game(
+						result.getString("team1Id"), 
+						result.getString("team2Id"),
+						result.getString("place"),
+						result.getDate("date"),
+						WmState.toWmState(result.getInt("wmState")));
+				game.setId(result.getInt("id"));
+				game.setGoal1(result.getInt("goal1"));
+				game.setGoal2(result.getInt("goal2"));
+				games.add(game);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return games;
 	}
 
 	@Override
 	public int add(Tip tip) {
-		// TODO Auto-generated method stub
-		return -1;
+		return executeSqlStatement(
+				"INSERT INTO (userId, gameId, tipGoalTeam1, tipGoalTeam2, tipWmWinnerTeamId, tipSecondPlaceTeamId, tipGoalWinnerTeamId, tipGoalLoserTeamId, tipMostGamesWonTeamId, tipMostGamesLostTeamId) Tip VALUES("
+						+ " '" + tip.getUserId() + "',"
+						+ " '" + tip.getGameId() + "',"
+						+ " '" + tip.getTipGoalTeam1() + "',"
+						+ " '" + tip.getTipGoalTeam2() + "',"
+						+ " '" + tip.getTipWmWinnerTeamId() + "',"
+						+ " '" + tip.getTipSecondPlaceTeamId() + "',"
+						+ " '" + tip.getTipGoalWinnerTeamId() + "' "
+						+ " '" + tip.getTipGoalLoserTeamId() + "' "
+						+ " '" + tip.getTipMostGamesWonTeamId() + "' "
+						+ " '" + tip.getTipMostGamesLostTeamId() + "' "
+						+ ");");
 	}
 
 	@Override
 	public List<Tip> getTips() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Tip> tips = new ArrayList<>();
+		ResultSet result = executeSqlSelect("SELECT * FROM Tip");
+		try {
+			while (result.next()) {
+				Tip tip = new Tip();
+				tip.setId(result.getInt("id"));
+				tip.setUserId(result.getString("userId"));
+				tip.setGameId(result.getInt("gameId"));
+				tip.setTipGoalTeam1(result.getInt("tipGoalTeam1"));
+				tip.setTipGoalTeam2(result.getInt("tipGoalTeam2"));
+				tip.setTipWmWinnerTeamId("tipWmWinnerTeamId");
+				tip.setTipSecondPlaceTeamId("tipSecondPlaceTeamId");
+				tip.setTipGoalWinnerTeamId("tipGoalWinnerTeamId");
+				tip.setTipGoalLoserTeamId("tipGoalLoserTeamId");
+				tip.setTipMostGamesWonTeamId("tipMostGamesWonTeamId");
+				tip.setTipMostGamesLostTeamId("tipMostGamesLostTeamId");
+				tips.add(tip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tips;
 	}
 
 	@Override
 	public User getUser(String username) {
-		// TODO Auto-generated method stub
+		List<User> users = getUsers();
+		for (User u : users) {
+			if (u.getUsername().equals(username)) return u;
+		}
 		return null;
 	}
 
 	@Override
 	public Team getTeam(String countryId) {
-		// TODO Auto-generated method stub
+		List<Team> teams = getTeams();
+		for (Team t : teams) {
+			if (t.getCountry().equals(countryId)) return t;
+		}
 		return null;
 	}
 
 	@Override
 	public Game getGame(int id) {
-		// TODO Auto-generated method stub
+		List<Game> games = getGames();
+		for (Game g : games) {
+			if (g.getId() == id) return g;
+		}
 		return null;
 	}
 
 	@Override
 	public Tip getTip(int id) {
-		// TODO Auto-generated method stub
+		List<Tip> tips = getTips();
+		for (Tip t : tips) {
+			if (t.getId() == id) return t;
+		}
 		return null;
 	}
 		
