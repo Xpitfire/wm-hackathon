@@ -1,0 +1,6 @@
+USE dbo;
+
+DROP TABLE IF EXISTS `dbo`.`Tip`;
+DROP TABLE IF EXISTS `dbo`.`Game`;
+DROP TABLE IF EXISTS `dbo`.`User`;
+DROP TABLE IF EXISTS `dbo`.`Team`;
