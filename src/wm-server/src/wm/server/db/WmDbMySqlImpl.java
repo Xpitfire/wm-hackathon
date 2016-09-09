@@ -151,4 +151,28 @@ public class WmDbMySqlImpl implements WmDb {
 				DB_PASSWORD);
 	}
 
+	@Override
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Team getTeam(String countryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Game getGame(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Tip getTip(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
