@@ -33,60 +33,49 @@ CREATE TABLE `dbo`.`Game` (
 	PRIMARY KEY (`id`),
 	CONSTRAINT `conteam1Id` 
 		FOREIGN KEY (`team1Id`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
+		REFERENCES `dbo`.`Team` (`country`),
 	CONSTRAINT `conteam2Id` 
 		FOREIGN KEY (`team2Id`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION
+		REFERENCES `dbo`.`Team` (`country`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `dbo`.`Tip` (
 	`id`					INT			NOT NULL AUTO_INCREMENT,
-	`userId`				VARCHAR (3)	NOT NULL,
+	`userId`				VARCHAR (30)	NOT NULL,
 	`gameId`				INT			NOT NULL,
 	`tipGoalTeam1`			INT			NOT NULL,
 	`tipGoalTeam2`			INT			NOT NULL,
 	`tipWmWinnerTeamId`		VARCHAR (3)	NOT NULL,
+	`tipSecondPlaceTeamId` 	VARCHAR (3) NOT NULL,
 	`tipGoalWinnerTeamId`	VARCHAR (3)	NOT NULL,
 	`tipGoalLoserTeamId`	VARCHAR (3)	NOT NULL,
-	`tipSecondPlaceTeamId`	VARCHAR (3)	NOT NULL,
-	`tipWmStateLoser`		INT			NOT NULL,
-	`tipWmStateLoserTeamId`	VARCHAR (3)	NOT NULL,
-	`tipZeroGoalsTeamId`	VARCHAR (3)	NOT NULL,
+	`tipMostGamesWonTeamId`	VARCHAR (3)	NOT NULL,
+	`tipMostGamesLostTeamId`VARCHAR (3)	NOT NULL,
 	PRIMARY KEY (`id`),
 	CONSTRAINT `conuserId`
 		FOREIGN KEY (`userId`) 
-		REFERENCES `User` (`username`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
+		REFERENCES `dbo`.`User` (`username`),
 	CONSTRAINT `congameId`
 		FOREIGN KEY (`gameId`) 
-		REFERENCES `Game` (`id`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
+		REFERENCES `dbo`.`Game` (`id`),
 	CONSTRAINT `contipWmWinnerTeamId` 
 		FOREIGN KEY (`tipWmWinnerTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
-	CONSTRAINT `contipGoalWinnerTeamId` 
-		FOREIGN KEY (`tipGoalWinnerTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
-	CONSTRAINT `contipGoalLoserTeamId` 
-		FOREIGN KEY (`tipGoalLoserTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
+		REFERENCES `dbo`.`Team` (`country`),
 	CONSTRAINT `contipSecondPlaceTeamId` 
 		FOREIGN KEY (`tipSecondPlaceTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
-	CONSTRAINT `contipWmStateLoserTeamId` 
-		FOREIGN KEY (`tipWmStateLoserTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION,
-	CONSTRAINT `contipZeroGoalsTeamId` 
-		FOREIGN KEY (`tipZeroGoalsTeamId`) 
-		REFERENCES `Team` (`country`) 
-		ON DELETE NO ACTION ON UPDATE NO ACTION
+		REFERENCES `dbo`.`Team` (`country`), 
+	CONSTRAINT `contipGoalWinnerTeamId` 
+		FOREIGN KEY (`tipGoalWinnerTeamId`) 
+		REFERENCES `dbo`.`Team` (`country`),
+	CONSTRAINT `contipGoalLoserTeamId` 
+		FOREIGN KEY (`tipGoalLoserTeamId`) 
+		REFERENCES `dbo`.`Team` (`country`),
+	CONSTRAINT `contipMostGamesWonTeamId` 
+		FOREIGN KEY (`tipMostGamesWonTeamId`) 
+		REFERENCES `dbo`.`Team` (`country`), 
+	CONSTRAINT `contipMostGamesLostTeamId` 
+		FOREIGN KEY (`tipMostGamesLostTeamId`) 
+		REFERENCES `dbo`.`Team` (`country`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
