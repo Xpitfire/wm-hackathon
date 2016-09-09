@@ -3,8 +3,6 @@ package wm.lib.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import wm.lib.WmState;
-
 public class Game implements Serializable {
 	private int id;
 	private String team1Id;

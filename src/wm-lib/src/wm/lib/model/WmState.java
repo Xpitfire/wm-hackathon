@@ -1,4 +1,4 @@
-package wm.lib;
+package wm.lib.model;
 
 public enum WmState {
 	
