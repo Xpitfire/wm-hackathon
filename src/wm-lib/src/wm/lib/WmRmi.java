@@ -9,6 +9,7 @@ import wm.lib.model.Game;
 import wm.lib.model.Team;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
+import wm.lib.model.WmState;
 
 public interface WmRmi extends Remote {
 	/**

@@ -9,11 +9,11 @@ public class Tip implements Serializable {
 	private int tipGoalTeam1;
 	private int tipGoalTeam2;
 	private String tipWmWinnerTeamId;
+	private String tipSecondPlaceTeamId;
 	private String tipGoalWinnerTeamId;
 	private String tipGoalLoserTeamId;
-	private String tipSecondPlaceTeamId;
-	private String tipWmStateLoserTeamId;
-	private String tipZeroGoalsTeamId;
+	private String tipMostGamesWonTeamId;
+	private String tipMostGamesLostTeamId;
 	
 	public Tip() {
 	}
@@ -72,16 +72,16 @@ public class Tip implements Serializable {
 	public void setTipSecondPlaceTeamId(String tipSecondPlaceTeamId) {
 		this.tipSecondPlaceTeamId = tipSecondPlaceTeamId;
 	}
-	public String getTipWmStateLoserTeamId() {
-		return tipWmStateLoserTeamId;
+	public String getTipMostGamesWonTeamId() {
+		return tipMostGamesWonTeamId;
 	}
-	public void setTipWmStateLoserTeamId(String tipWmStateLoserTeamId) {
-		this.tipWmStateLoserTeamId = tipWmStateLoserTeamId;
+	public void setTipMostGamesWonTeamId(String tipMostGamesWonTeamId) {
+		this.tipMostGamesWonTeamId = tipMostGamesWonTeamId;
 	}
-	public String getTipZeroGoalsTeamId() {
-		return tipZeroGoalsTeamId;
+	public String getTipMostGamesLostTeamId() {
+		return tipMostGamesLostTeamId;
 	}
-	public void setTipZeroGoalsTeamId(String tipZeroGoalsTeamId) {
-		this.tipZeroGoalsTeamId = tipZeroGoalsTeamId;
+	public void setTipMostGamesLostTeamId(String tipMostGamesLostTeamId) {
+		this.tipMostGamesLostTeamId = tipMostGamesLostTeamId;
 	}
 }

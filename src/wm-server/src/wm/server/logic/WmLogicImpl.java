@@ -6,11 +6,11 @@ import java.util.List;
 
 import wm.lib.WmDb;
 import wm.lib.WmRmi;
-import wm.lib.WmState;
 import wm.lib.model.Game;
 import wm.lib.model.Team;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
+import wm.lib.model.WmState;
 
 public class WmLogicImpl implements WmRmi {
 	private WmDb wmdb;
