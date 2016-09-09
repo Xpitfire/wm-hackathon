@@ -10,19 +10,119 @@ import wm.lib.model.Team;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
 
-public interface WmRmi extends WmLogic, Remote {
-	void add(User user) throws RemoteException;
-	void block(User user) throws RemoteException;
+public interface WmRmi extends Remote {
+	/**
+	 * @param username
+	 * @param passwordHash
+	 * @param firstName
+	 * @param lastName
+	 * @return false if user already exists
+	 * @throws RemoteException
+	 */
+	boolean createUser(String username, String passwordHash, String firstName, String lastName) throws RemoteException;
+	/**
+	 * @param username
+	 * @return false if user does not exist or is already blocked
+	 * @throws RemoteException
+	 */
+	boolean blockUser(String username) throws RemoteException;
+	/**
+	 * @return list of all users
+	 * @throws RemoteException
+	 */
 	List<User> getUsers() throws RemoteException;
-	void add(Team team) throws RemoteException;
-	void delete(Team team) throws RemoteException;
-	void update(Team team) throws RemoteException;
+	/**
+	 * @param username
+	 * @param passwordHash
+	 * @return false if user does not exist or wrong password entered
+	 * @throws RemoteException
+	 */
+	boolean authenticateUser(String username, String passwordHash) throws RemoteException;
+	
+	/**
+	 * @param country
+	 * @param name
+	 * @return false if team already exists
+	 * @throws RemoteException
+	 */
+	boolean createTeam(String country, String name) throws RemoteException;
+	/**
+	 * @param country
+	 * @return false if team does not exist
+	 * @throws RemoteException
+	 */
+	boolean deleteTeam(String country) throws RemoteException;
+	/**
+	 * @param country
+	 * @param name
+	 * @return false if team does not exist
+	 * @throws RemoteException
+	 */
+	boolean updateTeam(String country, String name) throws RemoteException;
+	/**
+	 * @return list of all teams
+	 * @throws RemoteException
+	 */
 	List<Team> getTeams() throws RemoteException;
-	Game createGame(Team team1, Team team2, String place, Date date, WmState wmState) throws RemoteException;
-	void delete(Game game) throws RemoteException;
-	void update(Game game) throws RemoteException;
-	void setFinalResult(Game game) throws RemoteException;
+	
+	/**
+	 * Can add game without end/final result.
+	 * @param team1
+	 * @param team2
+	 * @param place
+	 * @param date
+	 * @param wmState
+	 * @throws RemoteException
+	 */
+	void createGame(Team team1, Team team2, String place, Date date, WmState wmState) throws RemoteException;
+	/**
+	 * @param id
+	 * @return false if game does not exist
+	 * @throws RemoteException
+	 */
+	boolean delete(int id) throws RemoteException;
+	/**
+	 * @param id
+	 * @param team1
+	 * @param team2
+	 * @param place
+	 * @param date
+	 * @param wmState
+	 * @return false if game does not exist
+	 * @throws RemoteException
+	 */
+	boolean updateGame(int id, Team team1, Team team2, String place, Date date, WmState wmState) throws RemoteException;
+	/**
+	 * @param id
+	 * @param goal1
+	 * @param goal2
+	 * @return false if game does not exist
+	 * @throws RemoteException
+	 */
+	boolean setFinalResult(int id, int goal1, int goal2) throws RemoteException;
+	/**
+	 * 
+	 * @return list of all games
+	 * @throws RemoteException
+	 */
 	List<Game> getGames() throws RemoteException;
-	void add(Tip tip) throws RemoteException;
+	
+	/**
+	 * @param tip
+	 * @return false if game already finished or does not exist
+	 * @throws RemoteException
+	 */
+	boolean addTip(Tip tip) throws RemoteException;
+	/**
+	 * @return list of all tips
+	 * @throws RemoteException
+	 */
 	List<Tip> getTips() throws RemoteException;
+	/**
+	 * @param id
+	 * @return total points reached at bet / -1 if tip does not exist or game not finished yet
+	 * @throws RemoteException
+	 */
+	int evaluate(int id) throws RemoteException;
+	
 }
