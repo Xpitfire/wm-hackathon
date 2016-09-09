@@ -22,7 +22,7 @@ public class WmLogicImpl implements WmRmi {
 	@Override
 	public boolean createUser(String username, String passwordHash, String firstName, String lastName)
 			throws RemoteException {
-		if(wmdb.getUser(username) != null) {
+		if(wmdb.getUser(username) != null || username.length() < 1 || passwordHash.length() < 1 || firstName.length() < 1  || lastName.length() < 1) {
 			return false;
 		}
 		wmdb.add(new User(username, passwordHash, firstName, lastName));
@@ -54,7 +54,7 @@ public class WmLogicImpl implements WmRmi {
 	@Override
 	public boolean createTeam(String country, String name) throws RemoteException {
 		country = country.toUpperCase();
-		if(wmdb.getTeam(country) != null) {
+		if(wmdb.getTeam(country) != null  || country.length() < 1 || name.length() < 1) {
 			return false;
 		}
 		wmdb.add(new Team(country, name));
@@ -75,7 +75,7 @@ public class WmLogicImpl implements WmRmi {
 	@Override
 	public boolean updateTeam(String country, String name) throws RemoteException {
 		country = country.toUpperCase();
-		if(wmdb.getTeam(country) == null) {
+		if(wmdb.getTeam(country) == null || name.length() < 1) {
 			return false;
 		}
 		wmdb.update(new Team(country, name));
@@ -91,6 +91,9 @@ public class WmLogicImpl implements WmRmi {
 	public int createGame(String team1, String team2, String place, Date date, WmState wmState) throws RemoteException {
 		team1 = team1.toUpperCase();
 		team2 = team2.toUpperCase();
+		if(wmdb.getTeam(team1) == null || wmdb.getTeam(team2) == null || place.length() < 1 || date == null || wmState == null) {
+			return -1;
+		}
 		return wmdb.add(new Game(team1, team2, place, date, wmState));
 	}
 
@@ -107,7 +110,7 @@ public class WmLogicImpl implements WmRmi {
 	public boolean updateGame(int id, String team1, String team2, String place, Date date, WmState wmState) {
 		team1 = team1.toUpperCase();
 		team2 = team2.toUpperCase();
-		if(wmdb.getGame(id) == null) {
+		if(wmdb.getGame(id) == null || wmdb.getTeam(team2) == null || place.length() < 1 || date == null || wmState == null) {
 			return false;
 		}
 		wmdb.update(new Game(team1, team2, place, date, wmState));
