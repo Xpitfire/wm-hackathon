@@ -7,6 +7,10 @@ public class User implements Serializable {
 	private String passwordHash;
 	private String firstName;
 	private String lastName;
+	private boolean isActive = true;
+	
+	public User() {
+	}
 	
 	public User(String username, String firstName, String lastName) {
 		super();
@@ -46,5 +50,11 @@ public class User implements Serializable {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean active) {
+		this.isActive = active;
 	}
 }

@@ -16,13 +16,13 @@ public interface WmDb {
 	Team getTeam(String countryId);
 	List<Team> getTeams();
 	
-	void add(Game game);
+	int add(Game game);
 	void delete(Game game);
 	void update(Game game);
 	Game getGame(int id);
 	List<Game> getGames();
 	
-	void add(Tip tip);
+	int add(Tip tip);
 	Tip getTip(int id);
 	List<Tip> getTips();
 }

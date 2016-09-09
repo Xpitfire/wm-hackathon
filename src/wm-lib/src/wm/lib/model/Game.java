@@ -15,6 +15,9 @@ public class Game implements Serializable {
 	private int goal2;
 	private WmState wmstate;
 	
+	public Game() {
+	}
+	
 	public Game(String team1Id, String team2Id, String place, Date date, WmState wmState) {
 		super();
 		this.team1Id = team1Id;

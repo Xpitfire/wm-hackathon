@@ -15,6 +15,9 @@ public class Tip implements Serializable {
 	private String tipWmStateLoserTeamId;
 	private String tipZeroGoalsTeamId;
 	
+	public Tip() {
+	}
+	
 	public int getId() {
 		return id;
 	}
