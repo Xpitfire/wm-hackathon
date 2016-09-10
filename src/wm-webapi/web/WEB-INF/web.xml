@@ -10,7 +10,7 @@
 
 	<context-param>
 		<param-name>databaseURL</param-name>
-		<param-value>jdbc:mysql://localhost/dbo</param-value>
+		<param-value>jdbc:mysql://localhost:3306/dbo</param-value>
 	</context-param>
 
 	<listener>
@@ -24,7 +24,7 @@
 
 	<servlet-mapping>
 		<servlet-name>WmService</servlet-name>
-		<url-pattern>/wm-webapi</url-pattern>
+		<url-pattern>/wmapi</url-pattern>
 	</servlet-mapping>
 
 </web-app>
