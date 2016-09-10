@@ -26,7 +26,7 @@ CREATE TABLE `dbo`.`Game` (
 	`team1Id`  	VARCHAR (3)	NOT NULL,
 	`team2Id` 	VARCHAR (3)	NOT NULL,
 	`place` 	VARCHAR (3)	NOT NULL,
-	`'date'`  	DATETIME    NOT NULL,
+	`date`  	DATETIME    NOT NULL,
 	`goal1` 	INT			NOT NULL,
 	`goal2`   	INT			NOT NULL,
 	`wmstate`	INT			NOT NULL,

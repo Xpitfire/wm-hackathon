@@ -23,7 +23,7 @@ public class WmDbMySqlImpl implements WmDb {
 	private static final String DB_NAME = "dbo";
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "";
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyy-mm-dd'T'hh:mm:ss'Z'");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
 	public WmDbMySqlImpl() {
 	}
@@ -58,7 +58,7 @@ public class WmDbMySqlImpl implements WmDb {
 						result.getString("username"), 
 						result.getString("firstName"),
 						result.getString("lastName"));
-				user.setPasswordHash("passwordHash");
+				user.setPasswordHash(result.getString("passwordHash"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -111,14 +111,14 @@ public class WmDbMySqlImpl implements WmDb {
 	@Override
 	public int add(Game game) {
 		return executeSqlStatement(
-				"INSERT INTO (team1Id, team2Id, place, date, goal1, goal2, wmstate) Game VALUES("
+				"INSERT INTO Game (team1Id, team2Id, place, date, goal1, goal2, wmstate) VALUES("
 						+ " '" + game.getTeam1Id() + "',"
 						+ " '" + game.getTeam2Id() + "',"
 						+ " '" + game.getPlace() + "',"
 						+ " '" + DATE_FORMATTER.format(game.getDate()) + "',"
 						+ " '" + game.getGoal1() + "',"
 						+ " '" + game.getGoal2() + "',"
-						+ " '" + game.getWmstate() + "' "
+						+ " '" + game.getWmstate().getId() + "' "
 						+ ");");
 	}
 
@@ -139,7 +139,7 @@ public class WmDbMySqlImpl implements WmDb {
 						+ "date = '" + DATE_FORMATTER.format(game.getDate()) + "', "
 						+ "goal1 = '" + game.getGoal1() + "', "
 						+ "goal2 = '" + game.getGoal2() + "', "
-						+ "wmstate = '" + game.getWmstate() + "'"
+						+ "wmstate = '" + game.getWmstate().getId() + "'"
 						+ " WHERE id = " + game.getId() + ";");
 	}
 
@@ -169,7 +169,7 @@ public class WmDbMySqlImpl implements WmDb {
 	@Override
 	public int add(Tip tip) {
 		return executeSqlStatement(
-				"INSERT INTO (userId, gameId, tipGoalTeam1, tipGoalTeam2, tipWmWinnerTeamId, tipSecondPlaceTeamId, tipGoalWinnerTeamId, tipGoalLoserTeamId, tipMostGamesWonTeamId, tipMostGamesLostTeamId) Tip VALUES("
+				"INSERT INTO Tip (userId, gameId, tipGoalTeam1, tipGoalTeam2, tipWmWinnerTeamId, tipSecondPlaceTeamId, tipGoalWinnerTeamId, tipGoalLoserTeamId, tipMostGamesWonTeamId, tipMostGamesLostTeamId) VALUES("
 						+ " '" + tip.getUserId() + "',"
 						+ " '" + tip.getGameId() + "',"
 						+ " '" + tip.getTipGoalTeam1() + "',"
