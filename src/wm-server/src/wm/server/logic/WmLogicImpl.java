@@ -137,9 +137,9 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public int addTip(Tip tip) throws RemoteException {
-		if(wmdb.getGame(tip.getGameId()) == null || wmdb.getGame(tip.getGameId()).getDate().getTime() < System.currentTimeMillis()) {
-			return -1;
-		}
+//		if(wmdb.getGame(tip.getGameId()).getDate().getTime() < System.currentTimeMillis()) {
+//			return -1;
+//		}
 		return wmdb.add(tip);
 	}
 
@@ -181,6 +181,7 @@ public class WmLogicImpl implements WmRmi {
 	@Override
 	public int evaluateBonusQuestions(int id) throws RemoteException {
 		if(wmdb.getTip(id) == null) {
+			System.out.println("id null");
 			return -1;
 		}
 		int points = 0;
@@ -197,6 +198,7 @@ public class WmLogicImpl implements WmRmi {
 		for(Game game: wmdb.getGames()) {
 			// one game has not been finished => error
 			if(game.getGoal1() < 0 || game.getGoal2() < 0) {
+				System.out.println("one game not finished");
 				return -1;
 			}
 			String team1 = game.getTeam1Id();
@@ -235,6 +237,8 @@ public class WmLogicImpl implements WmRmi {
 			numGoalsScored.put(team2, numGoalsScored.get(team2)+game.getGoal2());
 		}
 		if(!finalHasBeenPlayed) {
+
+			System.out.println("final not played yet");
 			return -1;
 		}
 		
