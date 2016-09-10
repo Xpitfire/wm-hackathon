@@ -46,7 +46,7 @@ public class WmLogicImpl implements WmRmi {
 
 	@Override
 	public boolean authenticateUser(String username, String passwordHash) throws RemoteException {
-		if(wmdb.getUser(username) == null || wmdb.getUser(username).getPasswordHash() != passwordHash) {
+		if(wmdb.getUser(username) == null || !wmdb.getUser(username).getPasswordHash().equals(passwordHash)) {
 			return false;
 		}
 		return true;

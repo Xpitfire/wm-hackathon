@@ -18,6 +18,22 @@ public class Tip implements Serializable {
 	public Tip() {
 	}
 	
+	public Tip(String userId, int gameId, int tipGoalTeam1, int tipGoalTeam2, String tipWmWinnerTeamId,
+			String tipSecondPlaceTeamId, String tipGoalWinnerTeamId, String tipGoalLoserTeamId,
+			String tipMostGamesWonTeamId, String tipMostGamesLostTeamId) {
+		super();
+		this.userId = userId;
+		this.gameId = gameId;
+		this.tipGoalTeam1 = tipGoalTeam1;
+		this.tipGoalTeam2 = tipGoalTeam2;
+		this.tipWmWinnerTeamId = tipWmWinnerTeamId;
+		this.tipSecondPlaceTeamId = tipSecondPlaceTeamId;
+		this.tipGoalWinnerTeamId = tipGoalWinnerTeamId;
+		this.tipGoalLoserTeamId = tipGoalLoserTeamId;
+		this.tipMostGamesWonTeamId = tipMostGamesWonTeamId;
+		this.tipMostGamesLostTeamId = tipMostGamesLostTeamId;
+	}
+
 	public int getId() {
 		return id;
 	}

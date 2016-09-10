@@ -4,7 +4,7 @@ USE dbo;
 INSERT INTO `dbo`.`Team` VALUES 
 	('AUT', 'Österreich'), ('GER', 'Deutschland'),
 	('ALB', 'Albanien'), ('BHS', 'Bahamas'), 
-	('CHN' 'China'), ('FIN', 'Finnland'),
+	('CHN', 'China'), ('FIN', 'Finnland'),
 	('FRA', 'Frankreich'), ('GRC', 'Griechenland'),
 	('HKG', 'Hongkong'), ('IND', 'Indien'), 
 	('JPN', 'Japan'), ('CAN', 'Canada'),
@@ -45,9 +45,9 @@ INSERT INTO `dbo`.`Game` VALUES
 	(1014, 'ECU', 'ISR', 'AUT', '2016-08-26T12:00:00Z', 1, 3, 4);
 
 /* id, username, idfromgame, goal1, goal2, wmwinner, secondplace, goalwinner, goalloserteam, mostgameswonteam, mostgameslostteam */
-INSERT INTO `dbo`.`Tip` VALUES 
+/*INSERT INTO `dbo`.`Tip` VALUES 
 	(1000, 'pony', 1000, 2, 0, 'AUT', 'GER', 'AUT', 'GER', 'AUT', 'GER'),
-	(1001, 'matrix', 1001, 2, 2, 'IST', AUT, 'POL', 'GER', 'GRC', 'BHS'),
-	(1002, 'matrix', 1002, 3, 3, 'VNM', 'ISR', 'AUT', 'GER', DMA', THA'),
+	(1001, 'matrix', 1001, 2, 2, 'IST', 'AUT', 'POL', 'GER', 'GRC', 'BHS'),
+	(1002, 'matrix', 1002, 3, 3, 'VNM', 'ISR', 'AUT', 'GER', 'DMA', 'THA'),
 	(1003, 'lili', 1006, 2, 2, 'DMA', 'ISR', 'THA', 'GRC', 'DMA', 'DNK');
 
