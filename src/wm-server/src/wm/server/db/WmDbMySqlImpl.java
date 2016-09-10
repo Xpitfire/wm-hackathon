@@ -176,9 +176,9 @@ public class WmDbMySqlImpl implements WmDb {
 						+ " '" + tip.getTipGoalTeam2() + "',"
 						+ " '" + tip.getTipWmWinnerTeamId() + "',"
 						+ " '" + tip.getTipSecondPlaceTeamId() + "',"
-						+ " '" + tip.getTipGoalWinnerTeamId() + "' "
-						+ " '" + tip.getTipGoalLoserTeamId() + "' "
-						+ " '" + tip.getTipMostGamesWonTeamId() + "' "
+						+ " '" + tip.getTipGoalWinnerTeamId() + "',"
+						+ " '" + tip.getTipGoalLoserTeamId() + "',"
+						+ " '" + tip.getTipMostGamesWonTeamId() + "',"
 						+ " '" + tip.getTipMostGamesLostTeamId() + "' "
 						+ ");");
 	}
@@ -195,12 +195,12 @@ public class WmDbMySqlImpl implements WmDb {
 				tip.setGameId(result.getInt("gameId"));
 				tip.setTipGoalTeam1(result.getInt("tipGoalTeam1"));
 				tip.setTipGoalTeam2(result.getInt("tipGoalTeam2"));
-				tip.setTipWmWinnerTeamId("tipWmWinnerTeamId");
-				tip.setTipSecondPlaceTeamId("tipSecondPlaceTeamId");
-				tip.setTipGoalWinnerTeamId("tipGoalWinnerTeamId");
-				tip.setTipGoalLoserTeamId("tipGoalLoserTeamId");
-				tip.setTipMostGamesWonTeamId("tipMostGamesWonTeamId");
-				tip.setTipMostGamesLostTeamId("tipMostGamesLostTeamId");
+				tip.setTipWmWinnerTeamId(result.getString("tipWmWinnerTeamId"));
+				tip.setTipSecondPlaceTeamId(result.getString("tipSecondPlaceTeamId"));
+				tip.setTipGoalWinnerTeamId(result.getString("tipGoalWinnerTeamId"));
+				tip.setTipGoalLoserTeamId(result.getString("tipGoalLoserTeamId"));
+				tip.setTipMostGamesWonTeamId(result.getString("tipMostGamesWonTeamId"));
+				tip.setTipMostGamesLostTeamId(result.getString("tipMostGamesLostTeamId"));
 				tips.add(tip);
 			}
 		} catch (SQLException e) {

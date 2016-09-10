@@ -23,6 +23,8 @@ public class Game implements Serializable {
 		this.place = place;
 		this.date = date;
 		this.wmstate = wmState;
+		this.goal1 = -1;
+		this.goal2 = -1;
 	}
 	
 	public int getId() {

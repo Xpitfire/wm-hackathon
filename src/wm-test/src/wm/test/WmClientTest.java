@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import wm.lib.WmDb;
 import wm.lib.WmRmi;
+import wm.lib.model.Game;
 import wm.lib.model.Tip;
 import wm.lib.model.User;
 import wm.lib.model.WmState;
@@ -37,12 +38,17 @@ public class WmClientTest {
 	public void testPlaceTip() {
 	    try {
 			WmRmi wmProxy = (WmRmi)Naming.lookup("rmi://" + host_port + "/WmRmi");
-			int id = wmProxy.createGame("AUT", "ISR", "GER", new Date(System.currentTimeMillis()), WmState.FINAL);
-			Tip tip = new Tip("matrix", id, 3, 1, "AUT", "ISR", "GER", "AUT", "POL", "GER");
+			Tip tip = new Tip("matrix", 1002, 1, 3, "ISR", "POL", "AUT", "FIN", "BHS", "CAN");
 			int tipId = wmProxy.addTip(tip);
-			assertTrue(wmProxy.evaluateTip(tipId) == -1);
-			wmProxy.setFinalResult(id, 1, 2);
-			System.out.println(wmProxy.evaluateTip(tipId));
+			wmProxy.setFinalResult(1002, 3, 1);
+			assertTrue(wmProxy.evaluateTip(tipId) == 0);
+			wmProxy.setFinalResult(1002, 1, 2);
+			assertTrue(wmProxy.evaluateTip(tipId) == 1);
+			wmProxy.setFinalResult(1002, 0, 2);
+			assertTrue(wmProxy.evaluateTip(tipId) == 2);
+			wmProxy.setFinalResult(1002, 1, 3);
+			assertTrue(wmProxy.evaluateTip(tipId) == 4);
+			assertTrue(wmProxy.evaluateBonusQuestions(tipId) == 6);
 	    } catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
 		}
