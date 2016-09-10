@@ -1,0 +1,30 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+
+	<display-name>WmService</display-name>
+
+	<context-param>
+		<param-name>jdbcDriver</param-name>
+		<param-value>com.mysql.jdbc.Driver</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>databaseURL</param-name>
+		<param-value>jdbc:mysql://localhost/dbo</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>swe4.dal.DataSourceInitializer</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>WmService</servlet-name>
+		<servlet-class>wm.server.web.api.ServiceServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>WmService</servlet-name>
+		<url-pattern>/wm-webapi</url-pattern>
+	</servlet-mapping>
+
+</web-app>

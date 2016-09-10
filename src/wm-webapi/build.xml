@@ -1,0 +1,61 @@
+<project name="PhoneBookWeb" default="redeploy" basedir=".">
+
+  <property environment="env"/>
+  <property name="war.file" value="phonebook.war" />
+  <property name="src.dir" value="src" />
+  <property name="dest.dir" value="bin"/>
+  <property name="web.dir" value="web" />
+  <property name="java.lib.dir" value="/usr/share/java"/>
+  <property name="deploy.dir" value="${env.HOME}/tomcat/webapps" />
+
+  <fileset id="db.libs" dir="${java.lib.dir}">
+  	<include name="commons-dbcp.jar"/>
+    <include name="mysql-connector-java.jar"/>
+  </fileset>
+
+  <fileset id="web.libs" dir="${java.lib.dir}">
+    <include name="tomcat8-servlet-api.jar" />
+  </fileset>
+
+  <path id="project.classpath">
+    <fileset refid="db.libs" />
+    <fileset refid="web.libs" />
+  </path>
+
+  <target name="all" depends="clean,compile"/>
+
+  <target name="compile">
+    <mkdir dir="${dest.dir}" />
+    <javac includeantruntime="false" srcdir="${src.dir}" destdir="${dest.dir}" classpathref="project.classpath">
+      <include name="**/*.java"/>
+    </javac>
+  </target>
+
+  <target name="deploy" depends="compile">
+    <war destfile="${dest.dir}/${war.file}" webxml="${web.dir}/web.xml">
+      <fileset dir="${web.dir}">
+        <include name="**/*.html" />
+        <include name="**/*.jsp" />
+      </fileset>
+      <classes dir="${dest.dir}">
+        <include name="**/*.class" />
+      </classes>
+      <lib refid="db.libs" />
+    	<!-- note: web.libs do not have to be deployed to the server -->
+    </war>
+    <copy file="${dest.dir}/${war.file}" todir="${deploy.dir}" />
+  </target>
+
+  <target name="undeploy">
+    <delete>
+      <fileset file="${deploy.dir}/${war.file}" />
+    </delete>
+  </target>
+
+  <target name="clean">
+    <delete dir="${dest.dir}" />
+  </target>
+	
+	<target name="redeploy" depends="undeploy,clean,deploy"/>
+
+</project>
