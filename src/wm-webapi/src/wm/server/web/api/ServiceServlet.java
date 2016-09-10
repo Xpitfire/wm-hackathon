@@ -27,7 +27,8 @@ public class ServiceServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("application/json");
+		res.setContentType("text/json");
+		res.setStatus(HttpServletResponse.SC_OK);
 		res.setCharacterEncoding("utf-8");
 		PrintWriter out = res.getWriter();
 		try {
@@ -65,6 +66,8 @@ public class ServiceServlet extends HttpServlet {
 			e.printStackTrace();
 			out.print("{ 'error': '" + e.getMessage() + "' }");
 		}
+		out.flush();
+		out.close();
 	}
 
 }
