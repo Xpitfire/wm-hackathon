@@ -1,19 +1,90 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>Creating a table using javascript and AJAX</title>
+		<title>WM</title>
+		<meta charset="utf-8">
+			<style>
+			table {
+				border-collapse: collapse;
+				margin-bottom: 25px;
+				width: 100%;
+			}
 
+			th, td {
+				text-align: center;
+				padding: 8px;
+			}
+
+			tr:nth-child(even){background-color: #f2f2f2}
+
+			th {
+				background-color: #4CAF50;
+				color: white;
+			}
+			
+			input[type=text], select {
+				width: 100%;
+				padding: 12px 20px;
+				margin: 8px 0;
+				display: inline-block;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+
+			input[type=submit] {
+				width: 100%;
+				background-color: #4CAF50;
+				color: white;
+				padding: 14px 20px;
+				margin: 8px 0;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+
+			div {
+				border-radius: 5px;
+				background-color: #f2f2f2;
+				padding: 20px;
+			}
+			
+			h1 {
+				color: #4CAF50;
+			}
+			</style>
 	</head>
 
 	<body>
-
+	<h1> WM </h1>
 	<div class="wrapper">
-
 	</div>
-	
-	<p id="demo"></p> 
-	<p id="demo2"></p> 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<div class="tips">
+		
+		
+		<form action="action_page.php">
+		  Wer gewinnt die WM?<br>
+		  <input type="text" name="wmwinner" value="AUT">
+		  <br>
+		  Wer wird Zweiter bei der WM?<br>
+		  <input type="text" name="wmsecond" value="GER">
+		  <br>
+		  Wer schießt die meisten Tore?<br>
+		  <input type="text" name="wmgoalsmax" value="SWE">
+		  <br>
+		  Wer schießt die wenigsten Tore?<br>
+		  <input type="text" name="wmgoalsmin" value="FRA">
+		  <br>
+		  Wer gewinnt die meisten Spiele?<br>
+		  <input type="text" name="wmgamesmax" value="ISR">
+		  <br>
+		  Wer verliert die meisten Spiele?<br>
+		  <input type="text" name="wmgamesmin" value="EST">
+		  <br><br>
+		  <input type="submit" value="Tipp Abgeben">
+		</form>
+	</div>
 	<script>
 		var text = '{"Matches":[{"country1":"USA","country2":"AUT","goalsCountry1":1,"goalsCountry2":2},{"country1":"GER","country2":"RUS","goalsCountry1":2,"goalsCountry2":2},{"country1":"FRA","country2":"ESP","goalsCountry1":0,"goalsCountry2":1}],"Highscores":[{"username":"Lautschi","points":100},{"username":"Marius","points":90},{"username":"Philipp","points":80},{"username":"Phips","points":70},{"username":"Viki","points":0}]}';	
 		var obj = JSON.parse(text);		
